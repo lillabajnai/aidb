@@ -43,6 +43,7 @@ export class LoginComponent {
               // navigation
               console.log(data);
               this.isLoading = false;
+              window.location.reload()
               this.router.navigateByUrl('/home');
             }
           }, error: (err) => {
