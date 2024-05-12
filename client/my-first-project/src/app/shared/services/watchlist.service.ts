@@ -30,8 +30,7 @@ export class WatchlistService {
     return;
   }
 
-  getWatchlist(userId?: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}getWatchlist?userId=${userId}`);
+  getWatchlist(id?: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}getWatchlist/${id}`);
   }
-
 }

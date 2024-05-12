@@ -296,9 +296,8 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
         })
     });
 
-    router.get('/getWatchlist', (req: Request, res: Response) => {
-        const userId = req.params.userId;
-        const query = Watchlist.find({userId: userId});
+    router.get('/getWatchlist/:id', (req: Request, res: Response) => {
+        const query = Watchlist.find({userId: req.params.id});
         query.then(data => {
             res.status(200).send(data);
         }).catch(error => {
