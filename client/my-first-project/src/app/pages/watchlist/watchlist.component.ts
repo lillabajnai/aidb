@@ -6,6 +6,8 @@ import {User} from "../../shared/model/User";
 import {UserService} from "../../shared/services/user.service";
 import {WatchlistService} from "../../shared/services/watchlist.service";
 import {Watchlist} from "../../shared/model/Watchlist";
+import {Movie} from "../../shared/model/Movie";
+import {MovieService} from "../../shared/services/movie.service";
 
 @Component({
   selector: 'app-watchlist',
@@ -22,9 +24,10 @@ import {Watchlist} from "../../shared/model/Watchlist";
 })
 export class WatchlistComponent implements OnInit {
   items: Watchlist[] = [];
+  watchlist: any[] = [];
   user?: User;
 
-  constructor(private watchlistService: WatchlistService, private userService: UserService) { }
+  constructor(private watchlistService: WatchlistService, private userService: UserService, private movieService: MovieService) { }
 
   ngOnInit(): void {
     this.userService.getUser().subscribe({
@@ -43,10 +46,24 @@ export class WatchlistComponent implements OnInit {
         next: (data) => {
           this.items = data;
           console.log(this.items);
+          this.getMovie();
         }, error: (err: any) => {
           console.log(err);
         }
       });
+    }
+  }
+
+  getMovie() {
+    for (const item of this.items) {
+      this.movieService.getMovieById(item.movieId).subscribe(
+        (data: any) => {
+          this.watchlist.push(data);
+        },
+        (error: any) => {
+          console.error('Error fetching movie details', error);
+        }
+      );
     }
   }
 }

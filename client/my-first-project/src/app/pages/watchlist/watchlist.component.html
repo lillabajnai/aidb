@@ -1,7 +1,8 @@
 <div class="watchlist-container">
-  <mat-card *ngFor="let item of items">
-    <mat-card-title>{{ item.movieId }}</mat-card-title>
-    <mat-card-actions>
-    </mat-card-actions>
+  <mat-card *ngFor="let item of watchlist">
+    <mat-card-title>{{ item.title }}</mat-card-title>
+    <div class="movie-cover">
+      <img [src]="item.image" [style.max-width]="'200px'" alt="{{item.title}}">
+    </div>
   </mat-card>
 </div>

@@ -28,7 +28,7 @@ export class MovieService {
     return this.http.post('http://localhost:5000/app/movie', body, {headers: headers});
   }
 
-  getMovieById(id: number): Observable<any> {
+  getMovieById(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}movieById/${id}`);
   }
 
