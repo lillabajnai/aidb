@@ -1,0 +1,86 @@
+<div *ngIf="this.isAuthenticated">
+  <form [formGroup]="ratingForm" (ngSubmit)="submitRating()">
+    <mat-card>
+      <mat-card-title>Rate and Comment</mat-card-title>
+      <mat-card-content>
+        <div class="stars">
+          <mat-icon fontSet="material-icons-outlined"
+                    *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                    (click)="setRating(i + 1)"
+                    (mouseenter)="setHoverState(i + 1)"
+                    (mouseleave)="setHoverState(0)"
+                    [class.filled]="i < hoverState || i < rating">
+            grade
+          </mat-icon>
+        </div>
+        <mat-error *ngIf="ratingForm.get('rating')?.hasError('required')">
+          Rating is required.
+        </mat-error>
+        <mat-error *ngIf="ratingForm.get('rating')?.hasError('min') || ratingForm.get('rating')?.hasError('max')">
+          Rating must be between 1 and 5.
+        </mat-error>
+        <mat-form-field appearance="fill">
+          <mat-label>Comment</mat-label>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"
+                    formControlName="comment"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
+
+<mat-tab-group>
+  <mat-tab label="User Ratings">
+    <div *ngFor="let userRating of userRatings">
+      <mat-card>
+        <mat-card-header *ngIf="this.user?.nickname === 'admin'">
+          <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
+          <mat-icon
+            fontSet="material-icons-outlined"
+            [style.cursor]="'pointer'"
+            (click)="deleteRating(userRating._id)"
+          >
+            delete
+          </mat-icon>
+        </mat-card-header>
+        <mat-card-title>
+          <mat-icon fontSet="material-icons-outlined"
+                    *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                    [class.filled]="i < userRating.rating">
+            grade
+          </mat-icon>
+        </mat-card-title>
+        <mat-card-subtitle>{{userRating.comment}}</mat-card-subtitle>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="Critique Ratings">
+    <div>
+      <div *ngFor="let critiqueRating of critiqueRatings">
+        <mat-card>
+          <mat-card-header *ngIf="this.user?.nickname === 'admin'">
+            <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
+            <ng-container>
+              <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+            </ng-container>
+          </mat-card-header>
+          <mat-card-title>
+            <mat-icon fontSet="material-icons-outlined"
+                      *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                      [class.filled]="i < critiqueRating.rating">
+              grade
+            </mat-icon>
+          </mat-card-title>
+          <mat-card-subtitle>{{critiqueRating.comment}}</mat-card-subtitle>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,28 @@
+<nav class="top-nav">
+  <ul>
+    <li><a href="/movies">Movies</a></li>
+    <li><a href="/watchlist">Watchlist</a></li>
+    <li class="logo"><a href="/">AIDb</a></li>
+    <li *ngIf="this.user?.nickname === 'admin'"><a href="/user-management">User Management</a></li>
+    <div *ngIf="isAuthenticated; else loggedOut">
+      <mat-icon (click)="logoutUser()" [style.cursor]="'pointer'" fontIcon="logout"></mat-icon>
+    </div>
+    <ng-template #loggedOut>
+      <div (mouseenter)="mouseEnter()"> <!-- (mouseleave)="mouseLeave()" -->
+        <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
+        <div *ngIf="showHoverWindow" class="hover-window" [ngStyle]="{'width': hoverWindowSize, 'height': hoverWindowSize}">
+          <app-login></app-login>
+        </div>
+      </div>
+    </ng-template>
+<!--    <div>-->
+<!--      <mat-form-field>-->
+<!--        <mat-label>Search</mat-label>-->
+<!--        <input matInput type="text"> &lt;!&ndash; [(ngModel)]="value"> &ndash;&gt;-->
+<!--        <button class="search-icon" matSuffix mat-icon-button aria-label="Search" aria-hidden="false">-->
+<!--          <mat-icon>search</mat-icon>-->
+<!--        </button>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+  </ul>
+</nav>

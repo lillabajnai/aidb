@@ -1,0 +1,13 @@
+<div class="movie-page-container" *ngIf="movie">
+  <div class="movie-cover">
+    <img [src]="movie.image" [style.max-width]="'400px'" alt="{{movie.title}}">
+  </div>
+  <div class="movie-details">
+    <h2>{{movie.title}}</h2>
+    <p class="movie-year">{{movie.year}}</p>
+    <p class="movie-description">{{movie.description}}</p>
+    <div class="movie-rating">
+      <app-rating [movieId]="movieId"></app-rating>
+    </div>
+  </div>
+</div>

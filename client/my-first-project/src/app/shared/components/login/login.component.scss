@@ -1,0 +1,26 @@
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  margin-bottom: 10px;
+  border-radius: 25px;
+  --mdc-filled-text-field-container-color: #3f4948;
+}
+
+button {
+  margin-top: 10px;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: cornflowerblue;
+}
+

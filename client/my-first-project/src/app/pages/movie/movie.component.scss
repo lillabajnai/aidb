@@ -1,0 +1,27 @@
+.movie-page-container {
+  display: flex;
+  margin: 20px;
+}
+
+.movie-cover {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.movie-details {
+  color: #fff;
+  flex: 2;
+}
+
+.movie-year, .movie-description, .rating-description {
+  margin: 10px 0;
+}
+
+.movie-rating {
+  display: flex;
+  align-items: center;
+}
+
+mat-star-rating {
+  margin-right: 10px;
+}

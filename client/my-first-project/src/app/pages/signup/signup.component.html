@@ -1,0 +1,32 @@
+<div class="center-container">
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Enter your email">
+      <mat-error *ngIf="signUpForm.controls['email'].invalid">Please enter a valid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="nickname" placeholder="Choose a username">
+      <mat-error *ngIf="signUpForm.controls['nickname'].invalid">Username is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password" placeholder="Enter your password">
+      <mat-error *ngIf="signUpForm.controls['password'].invalid">Password must be at least 8 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm your password">
+      <mat-error *ngIf="signUpForm.controls['confirmPassword'].invalid">Please confirm your password</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isCritique">
+      <p [style.color]="'#fff'">Critique (for testing purposes only)</p>
+    </mat-checkbox>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid">Sign Up</button>
+  </form>
+</div>
