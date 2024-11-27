@@ -8,12 +8,13 @@
       <mat-icon (click)="logoutUser()" [style.cursor]="'pointer'" fontIcon="logout"></mat-icon>
     </div>
     <ng-template #loggedOut>
-      <div (mouseenter)="mouseEnter()"> <!-- (mouseleave)="mouseLeave()" -->
+      <div (click)="toggleHoverWindow()" class="clickable-icon">
         <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
-        <div *ngIf="showHoverWindow" class="hover-window" [ngStyle]="{'width': hoverWindowSize, 'height': hoverWindowSize}">
-          <app-login></app-login>
-        </div>
       </div>
+      <div *ngIf="showHoverWindow" class="hover-window" [ngStyle]="{'width': hoverWindowSize, 'height': hoverWindowSize}">
+        <app-login></app-login>
+      </div>
+
     </ng-template>
 <!--    <div>-->
 <!--      <mat-form-field>-->

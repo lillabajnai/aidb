@@ -57,14 +57,6 @@ export class TopNavBarComponent implements OnInit {
     this.hoverWindowSize = (window.innerWidth / 4) + 'px';
   }
 
-  mouseEnter() {
-    this.showHoverWindow = true;
-  }
-
-  mouseLeave() {
-    this.showHoverWindow = false;
-  }
-
   checkUserAuth() {
     this.authService.checkAuth().subscribe(
       {
@@ -90,5 +82,9 @@ export class TopNavBarComponent implements OnInit {
         console.error(error);
       }
   });
+  }
+
+  toggleHoverWindow() {
+    this.showHoverWindow = !this.showHoverWindow;
   }
 }
