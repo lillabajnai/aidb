@@ -1,5 +1,5 @@
 // eslint.config.js
-export default [
+module.exports = [
   {
     languageOptions: {
       ecmaVersion: 2021,
