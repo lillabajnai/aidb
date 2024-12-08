@@ -1,0 +1,41 @@
+services:
+  jenkins:
+    build:
+      context: ./CICD
+      dockerfile: Dockerfile_jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile_nodejs
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+
+  frontend:
+    build:
+      context: ./client/my-first-project
+      dockerfile: Dockerfile_angular
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+
+volumes:
+  jenkins_home:
+  mongo-data:

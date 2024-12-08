@@ -1,0 +1,16 @@
+# Build stage
+FROM node:20-alpine AS builder
+RUN apk update
+RUN apk add git
+RUN npm install -g @angular/cli
+RUN npm install -g pm2
+RUN npm install -g http-server
+WORKDIR /app
+RUN git clone https://github.com/lillabajnai/aidb.git
+WORKDIR /app/aidb
+RUN git checkout devops
+WORKDIR /app/aidb/client/my-first-project
+RUN npm install
+RUN npm run build
+EXPOSE 4200
+CMD ["pm2-runtime", "start", "http-server", "--name", "'angular-app'", "--", "-p", "4200", "-d", "false", "./dist/my-first-project/browser"]
