@@ -18,7 +18,7 @@ const movies = [
 
 const populateDB = async () => {
     try {
-        await mongoose.connect('mongodb://mongo:6000/mongo_db', {
+        await mongoose.connect('mongodb://172.100.0.30:27017/my_db', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
