@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {User} from "../model/User";
 import {Movie} from "../model/Movie";
+import { environment } from '../../../environment';
+
+const API_URL = environment.API_URL;
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
-  private apiUrl = 'http://localhost:5000/app/';
-
   constructor(private http: HttpClient) {}
 
   addMovie(movie: Movie) {
@@ -25,14 +25,14 @@ export class MovieService {
       'Content-Type': 'application/x-www-form-urlencoded'
     });
 
-    return this.http.post('http://localhost:5000/app/movie', body, {headers: headers});
+    return this.http.post(API_URL + 'movie', body, {headers: headers});
   }
 
   getMovieById(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}movieById/${id}`);
+    return this.http.get(`${API_URL}movieById/${id}`);
   }
 
   getAllMovies(): Observable<any> {
-    return this.http.get(`${this.apiUrl}getAllMovies`);
+    return this.http.get(`${API_URL}getAllMovies`);
   }
 }

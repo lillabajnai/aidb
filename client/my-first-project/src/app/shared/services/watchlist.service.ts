@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Rating } from "../model/Rating";
+import { environment } from '../../../environment';
+
+const API_URL = environment.API_URL;
 
 @Injectable({
   providedIn: 'root'
 })
 export class WatchlistService {
-  private apiUrl = 'http://localhost:5000/app/';
-
   constructor(private http: HttpClient) {}
 
   addMovie(movieId: string, userId?: any) {
@@ -24,13 +24,13 @@ export class WatchlistService {
         'Content-Type': 'application/x-www-form-urlencoded'
       });
 
-      return this.http.post('http://localhost:5000/app/addMovie', body, {headers: headers});
+      return this.http.post(API_URL + 'addMovie', body, {headers: headers});
     }
 
     return;
   }
 
   getWatchlist(id?: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}getWatchlist/${id}`);
+    return this.http.get(`${API_URL}getWatchlist/${id}`);
   }
 }

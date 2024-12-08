@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Rating } from "../model/Rating";
+import { environment } from '../../../environment';
+
+const API_URL = environment.API_URL;
 
 @Injectable({
   providedIn: 'root'
 })
 export class RatingService {
-  private apiUrl = 'http://localhost:5000/app/';
-
   constructor(private http: HttpClient) {}
 
   addRating(rating: Rating) {
@@ -28,14 +29,14 @@ export class RatingService {
   }
 
   getUserRatings(movieId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}getUserRatings?movieId=${movieId}`);
+    return this.http.get(`${API_URL}getUserRatings?movieId=${movieId}`);
   }
 
   getCritiqueRatings(movieId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}getCritiqueRatings?movieId=${movieId}`);
+    return this.http.get(`${API_URL}getCritiqueRatings?movieId=${movieId}`);
   }
 
   delete(id: string) {
-    return this.http.delete('http://localhost:5000/app/deleteRating?id=' + id, {withCredentials: true});
+    return this.http.delete(API_URL + 'deleteRating?id=' + id, {withCredentials: true});
   }
 }

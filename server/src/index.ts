@@ -1,6 +1,4 @@
-import { MainClass } from './main-class';
 import express from 'express';
-import { Request, Response } from 'express';
 import { configureRoutes } from './routes/routes';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -12,7 +10,7 @@ import cors from 'cors';
 
 const app = express();
 const port = 5000;
-const dbUrl = 'mongodb://localhost:6000/my_db';
+const dbUrl = 'mongodb://172.100.0.30:27017/my_db';
 
 // mongodb connection
 mongoose.connect(dbUrl).then((_) => {
@@ -22,7 +20,7 @@ mongoose.connect(dbUrl).then((_) => {
     return;
 });
 
-const whitelist = ['*', 'http://localhost:4200']
+const whitelist = ['*', 'http://localhost:4200', 'http://frontend:4200', 'http://172.100.0.20:4200'];
 const corsOptions = {
     origin: (origin: string | undefined, callback: (err: Error | null, allowed?: boolean) => void) => {
         if (whitelist.indexOf(origin!) !== -1 || whitelist.includes('*')) {
